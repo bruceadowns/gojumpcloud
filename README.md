@@ -25,6 +25,8 @@ your program should return
 * POST body is `password=%s` where only %s should be hashed
 * Use http only per requirement. No https.
 * `curl -X POST --data "password=angryMonkey" http://localhost:8080`
+* Assume a reasonable password size and encoding
+* Do not worry about read or write timeout values
 
 ## Instructions
 ### Get source
