@@ -47,6 +47,7 @@ func hashEncodePassword(p string) string {
 //
 // hash password iff all conditions are met
 // * this is an http post
+// * to / (not /something /else)
 // * the form contains a single element named "password"
 // * the password element is not empty
 func rootHandler(w http.ResponseWriter, r *http.Request) {
