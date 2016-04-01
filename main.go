@@ -45,7 +45,7 @@ func hashEncodePassword(p string) string {
 
 // rootHandler handles all requests
 //
-// hash password iif all conditions are met
+// hash password iff all conditions are met
 // * this is an http post
 // * the form contains a single element named "password"
 // * the password element is not empty
@@ -80,6 +80,12 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 		password = v[0]
 	} else {
 		usage(w, fmt.Errorf("Expect password form field"))
+		return
+	}
+
+	// check password len
+	if len(password) < 1 {
+		usage(w, fmt.Errorf("Expect valid password value. Received empty value."))
 		return
 	}
 
