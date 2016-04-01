@@ -85,7 +85,7 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// check password len
-	if len(password) < 1 {
+	if len(password) == 0 {
 		usage(w, fmt.Errorf("Expect valid password value. Received empty value."))
 		return
 	}
