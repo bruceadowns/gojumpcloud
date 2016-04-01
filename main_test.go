@@ -118,7 +118,7 @@ func TestHashEncode(t *testing.T) {
 
 	// $ echo -n topher | openssl sha1 -sha512 -binary | openssl enc -base64
 	// +MzpZ9kU8vZ06dDMjgBO44s99oVkdbkBstEqDq9zhFZ9E/T+Q3DxPf98lk6ni4K0
-	//  xdSrTmQ19bHup/o4LIXd5w==
+	// xdSrTmQ19bHup/o4LIXd5w==
 
 	var tt = []struct {
 		in       string
