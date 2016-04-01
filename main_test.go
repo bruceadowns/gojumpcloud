@@ -3,11 +3,13 @@ package main
 import (
 	"io"
 	"io/ioutil"
+	"math/rand"
 	"net/http"
 	"net/url"
 	"os"
 	"strconv"
 	"testing"
+	"time"
 )
 
 func TestEmptyUrl(t *testing.T) {
@@ -72,9 +74,6 @@ func TestSinglePostForm(t *testing.T) {
 }
 
 func TestMultiPostForm(t *testing.T) {
-	// note, this is lame load test
-	// it simply fires n requests and waits for each to finish
-
 	jcURL := os.Getenv("GOJUMPCLOUD_URL")
 	if len(jcURL) == 0 {
 		t.Skip("Provide GOJUMPCLOUD_URL env variable")
@@ -92,12 +91,17 @@ func TestMultiPostForm(t *testing.T) {
 	ch := make(chan struct{})
 	for i := 0; i < jcCount; i++ {
 		go postMultiForm(t, jcURL, ch)
-		t.Logf("Posted %s [%d]\n", jcURL, i)
+		t.Logf("Posted %s [%d]", jcURL, i)
+
+		// sleep for a random ms
+		d := time.Duration(rand.Intn(100)) * time.Millisecond
+		t.Logf("Sleep for %s", d)
+		time.Sleep(d)
 	}
 
 	for i := 0; i < jcCount; i++ {
 		<-ch
-		t.Logf("Received %d\n", i)
+		t.Logf("Received %d", i)
 	}
 }
 
