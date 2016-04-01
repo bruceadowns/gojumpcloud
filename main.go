@@ -10,17 +10,17 @@ import (
 )
 
 const (
-	sleepDurationMs = 5000
-	formName        = "password"
+	sleepDuration = 5
+	formName      = "password"
 )
 
 func usage(w http.ResponseWriter, err error) {
 	htmlHeader := `<html>
 <body>`
 	htmlForm := `<form action="/" method="post">
-  Enter Password:<br>
-  <input type="text" name="password" value="angryMonkey">
-  <input type="submit" value="Submit">
+Enter Password:<br>
+<input type="text" name="password" value="angryMonkey">
+<input type="submit" value="Submit">
 </form>`
 	htmlFooter := `</body>
 </html>`
@@ -83,7 +83,7 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	d := time.Duration(sleepDurationMs) * time.Millisecond
+	d := time.Duration(sleepDuration) * time.Second
 	log.Printf("Sleep for %s", d)
 	time.Sleep(d)
 
